@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Kuttus, Be My Valentine 💖</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  bottom: -20px;
+  animation: floatUp 6s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-120vh); opacity: 0; }
+}
+
+.container {
+  background: white;
+  padding: 40px;
+  border-radius: 25px;
+  text-align: center;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+  animation: fadeIn 1.5s ease;
+  z-index: 2;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.names {
+  font-size: 1.2rem;
+  color: #777;
+  margin-bottom: 8px;
+}
+
+h1 {
+  color: #ff4d6d;
+  font-size: 2.4rem;
+  margin: 5px 0;
+}
+
+.message {
+  font-size: 1rem;
+  color: #555;
+  margin: 15px 0;
+}
+
+.countdown {
+  font-size: 1.1rem;
+  color: #ff4d6d;
+  margin-bottom: 15px;
+}
+
+/* Slideshow */
+.slideshow {
+  position: relative;
+  height: 180px;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+button {
+  padding: 14px 32px;
+  border-radius: 30px;
+  border: none;
+  font-size: 1.05rem;
+  cursor: pointer;
+  margin: 10px;
+  transition: 0.3s;
+}
+
+#yesBtn {
+  background: #ff4d6d;
+  color: white;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+#noBtn {
+  background: #ddd;
+  position: absolute;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background Music -->
+<iframe width="0" height="0"
+src="https://www.youtube.com/embed/vGJTaP6anOU?autoplay=1&loop=1&playlist=vGJTaP6anOU"
+frameborder="0" allow="autoplay"></iframe>
+
+<div class="container">
+  <div class="names">Kuttus 💖 Your Momo</div>
+  <h1>Will you be my Valentine?</h1>
+
+  <div class="message">
+    Your Momo will always be with you no matter what, holding your hand.<br>
+    You're my whole heart my love! I'm nothing without you my Jaan! 💕
+  </div>
+
+  <div class="countdown" id="countdown"></div>
+
+  <div class="slideshow">
+    <img src="photo1.jpg" class="slide active">
+    <img src="photo2.jpg" class="slide">
+    <img src="photo3.jpg" class="slide">
+    <img src="photo4.jpg" class="slide">
+    <img src="photo5.jpg" class="slide">
+  </div>
+
+  <button id="yesBtn">YES 💖</button>
+  <button id="noBtn">NO 💔</button>
+</div>
+
+<script>
+/* NO button escapes */
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseover", () => {
+  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+});
+
+/* YES screen */
+document.getElementById("yesBtn").addEventListener("click", () => {
+  document.body.innerHTML = `
+    <div style="
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+      font-family:Poppins;
+      text-align:center;
+    ">
+      <h1 style="color:white;font-size:3rem;">
+        YAY!!! 💖🎉<br>
+        I knew you'd say yes, my love 🥰<br><br>
+        Forever yours,<br>
+        Your Momo 💕
+      </h1>
+    </div>
+  `;
+});
+
+/* Floating hearts */
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💗";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 20 + 20 + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 7000);
+}, 300);
+
+/* Slideshow */
+let slideIndex = 0;
+const slides = document.querySelectorAll(".slide");
+
+setInterval(() => {
+  slides[slideIndex].classList.remove("active");
+  slideIndex = (slideIndex + 1) % slides.length;
+  slides[slideIndex].classList.add("active");
+}, 3000);
+
+/* Countdown */
+const countdownEl = document.getElementById("countdown");
+const valentine = new Date("Feb 14, 2026 00:00:00").getTime();
+
+setInterval(() => {
+  const now = new Date().getTime();
+  const distance = valentine - now;
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  countdownEl.innerHTML = `⏳ ${days} days until Valentine’s Day`;
+}, 1000);
+</script>
+
+</body>
+</html>
