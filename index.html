@@ -121,12 +121,28 @@ button {
 </style>
 </head>
 
-<body>
+<<audio id="loveSong" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/10/30/audio_2a6a8df1c6.mp3" type="audio/mpeg">
+</audio>
 
+<button onclick="document.getElementById('loveSong').play()" 
+style="
+position:fixed;
+bottom:20px;
+right:20px;
+padding:10px 18px;
+border-radius:25px;
+border:none;
+background:#ff4d6d;
+color:white;
+font-size:0.9rem;
+cursor:pointer;
+z-index:999;
+">
+🎶 Play our song
+</button>
+  
 <!-- Background Music -->
-<iframe width="0" height="0"
-src="https://www.youtube.com/embed/vGJTaP6anOU?autoplay=1&loop=1&playlist=vGJTaP6anOU"
-frameborder="0" allow="autoplay"></iframe>
 
 <div class="container">
   <div class="names">Kuttus 💖 Your Momo</div>
